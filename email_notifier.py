@@ -28,8 +28,8 @@ def healthcheck():
 @app.route('/send_email', methods=['POST'])
 def send_email():
     data = json.loads(request.get_json())
-    print(data)
     if data['is_fake'] == False:
+        print(data)
         emails = list(map(lambda row: row[0], User.query.with_entities(User.email).all()))
         post_url = data['post_url']
 
