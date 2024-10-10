@@ -43,7 +43,7 @@ def notify_users(post_id: int):
         url=sender_url,
         json=json_data
     )
-    print(resp.content)
+    print(resp.status_code)
 
 
 @app.get("/")
