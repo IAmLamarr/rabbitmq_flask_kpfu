@@ -13,6 +13,6 @@ class QuickstartUser(HttpUser):
         url = self.fake.url()
         json_data = json.dumps({
             'post_url': url,
-            'is_fake': True
+            'is_fake': False
         })
         self.client.post('/send_email', json=json_data)
