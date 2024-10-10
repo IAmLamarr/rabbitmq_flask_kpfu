@@ -48,7 +48,7 @@ def notify_users(post_id: int):
 
 @app.get("/")
 def index_page():
-    return "<p>Hello, World!</p>"
+    return render_template('index.html')
 
 @app.get('/post/<post_id>')
 def post_page(post_id: int):

@@ -1,12 +1,11 @@
 {% from 'bootstrap5/form.html' import render_form %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create post</title>
-</head>
-<body>
+
+{% extends 'base.html' %}
+
+{% block title %}
+    Create post
+{% endblock %}
+
+{% block content %}
     {{ render_form(form) }}
-</body>
-</html>
+{% endblock %}

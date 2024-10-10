@@ -3,7 +3,7 @@ import dotenv
 import os
 import secrets
 from flask_mail import Mail, Message
-from models import db, User
+from models import Post, db, User
 import json
 import pika
 
@@ -40,12 +40,16 @@ def send_email(ch, method, properties, body):
                 mail.send(msg)
             except Exception as e:
                 print(e)
+            if data['post_id'] is not None:
+                post = Post.query.get(data['post_id'])
+                post.published = True
+                db.session.commit()
 
 if __name__ == "__main__":
     connection = pika.BlockingConnection(pika.ConnectionParameters(host="localhost"))
     channel = connection.channel()
     channel.queue_declare(queue='email')
-    channel.basic_consume(queue='email', on_message_callback=send_email)
+    channel.basic_consume(queue='email', on_message_callback=send_email, auto_ack=True)
     channel.start_consuming()
     # app.run(
     #     host=os.getenv("APP_HOST"), 
