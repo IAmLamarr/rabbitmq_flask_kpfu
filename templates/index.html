@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Hello!
+{% endblock %}
+
+{% block content %}
+    <h1>Hello!</h1>
+    <a href="{{ url_for('create_post_page') }}">
+        Create new post
+    </a>
+{% endblock %}

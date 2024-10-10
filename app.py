@@ -10,6 +10,8 @@ from flask_wtf import CSRFProtect
 import json
 import requests
 
+from utils import get_notifier_url
+
 dotenv.load_dotenv()
 
 app = Flask(__name__)
@@ -36,8 +38,7 @@ def notify_users(post_id: int):
         'post_url': post_url,
         'is_fake': False,
     })
-    sender_port = os.getenv("SENDER_PORT")
-    sender_url = f"http://{host}:{sender_port}/send_email"
+    sender_url = get_notifier_url()
     resp = requests.post(
         url=sender_url,
         json=json_data
@@ -47,7 +48,7 @@ def notify_users(post_id: int):
 
 @app.get("/")
 def index_page():
-    return "<p>Hello, World!</p>"
+    return render_template('index.html')
 
 @app.get('/post/<post_id>')
 def post_page(post_id: int):
